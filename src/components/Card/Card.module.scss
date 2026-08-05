@@ -1,0 +1,30 @@
+@use '../../styles/_index.scss' as styles;
+
+.card {
+    min-height: 50wh;
+    width: 80%;
+    padding: 1rem 0.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+
+    @media (min-width: styles.$tablet) {
+        width: 40%;
+    }
+
+    @media (min-width: styles.$laptopL) {
+        width: 40%;
+    }
+
+    &__image {
+        width: 100%;
+
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+    }
+
+    &__title {
+        font-size: 2.5rem;
+    }
+}
