@@ -1,0 +1,21 @@
+@use '../../styles/_index.scss' as styles;
+
+.wrapper {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 4rem;
+
+    @media (min-width: styles.$tablet) {
+        display: grid;
+        grid-template-columns: repeat(3, auto);
+        justify-content: center;
+    }
+
+    @media (min-width: styles.$laptopL) {
+        display: grid;
+        grid-template-columns: repeat(4, auto);
+        justify-content: center;
+    }
+}
