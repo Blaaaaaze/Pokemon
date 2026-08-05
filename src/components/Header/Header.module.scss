@@ -1,0 +1,14 @@
+.header {
+    background-color: red;
+    padding: 0 0.7rem;
+    display: flex;
+    justify-content: center;
+    
+    &__title {
+        font-family: Pokemon;
+        font-size: 5rem;
+        color: white;
+        margin: 0;
+        line-height: 1.7;
+    }
+}
