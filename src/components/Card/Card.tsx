@@ -1,14 +1,16 @@
 import styles from './Card.module.scss';
-import charmander from '../../assets/imgs/Charmander.jpg';
+import type { PokemonCard } from '../../types';
 
-const Card = () => {
+
+
+const Card = ({name, img, stats, types}: PokemonCard) => {
     return (
         <div className={styles.card}>
             <div className={styles.card__image}>
-                <img src={charmander} alt="pokename" />
+                <img src={img} alt={name} />
             </div>
             <div className={styles.card__content}>
-                <h3 className={styles.card__title}>Pokename</h3>
+                <h3 className={styles.card__title}>{name}</h3>
                 <div className={styles.card__icons}>
 
                 </div>

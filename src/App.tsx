@@ -1,6 +1,5 @@
-import Card from './components/Card/Card'
 import Header from './components/Header/Header'
-import PokemonList from './components/PokemonList/PokemonList';
+import PokemonList from './features/PokemonList/PokemonList';
 
 function App() {
   return (
