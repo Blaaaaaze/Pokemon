@@ -1,3 +1,23 @@
+export type PokemonTypeName = 
+| 'normal'
+| 'fire'
+| 'water'
+| 'electric'
+| 'grass'
+| 'ice'
+| 'fighting'
+| 'poison'
+| 'ground'
+| 'flying'
+| 'psychic'
+| 'bug'
+| 'rock'
+| 'ghost'
+| 'dragon'
+| 'dark'
+| 'steel'
+| 'fairy';
+
 type PokemonStat = {
     base_stat: number,
     stat: {
@@ -16,7 +36,7 @@ type PokemonAbility = {
 type PokemonType = {
     slot: number,
     type: {
-        name: string,
+        name: PokemonTypeName,
         url: string,
     }
 }

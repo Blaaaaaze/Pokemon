@@ -28,6 +28,7 @@ const Card = ({name, img, stats, types}: PokemonCard) => {
                                 <Stat 
                                     name={stat.stat.name}
                                     value={stat.base_stat}
+                                    key={`${name}-${stat.stat.name}`}
                                 />
                                 </>
                             )
