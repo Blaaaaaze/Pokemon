@@ -9,13 +9,13 @@
 
     @media (min-width: styles.$tablet) {
         display: grid;
-        grid-template-columns: repeat(3, auto);
+        grid-template-columns: repeat(3, 1fr);
         justify-content: center;
     }
 
     @media (min-width: styles.$laptopL) {
         display: grid;
-        grid-template-columns: repeat(4, auto);
+        grid-template-columns: repeat(4, 1fr);
         justify-content: center;
     }
 }

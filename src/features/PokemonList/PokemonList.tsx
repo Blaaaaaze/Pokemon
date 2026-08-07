@@ -1,19 +1,30 @@
 import { useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
-import { useAppDispatch, type RootState } from '../../store';
+import { useAppDispatch} from '../../store';
 import styles from './PokemonList.module.scss';
-import { selectAllPokemons } from './pokemons-selectors';
+import { selectCurrentPage, selectPokemons, selectPokemonsCount } from './pokemons-selectors';
 import { useEffect } from 'react';
-import { loadPokemons } from './pokemons-slice';
+import { loadPokemons, setCurrentPage } from './pokemons-slice';
+import Pagination from '../../components/Pagination/Pagination';
 
 
 const PokemonList = () => {
     const dispatch = useAppDispatch();
-    const pokemons = useSelector((state: RootState) => selectAllPokemons(state));
-    console.log(1);
+    const pokemons = useSelector(selectPokemons);
+    const totalCountPokemons = useSelector(selectPokemonsCount);
+    const currentPage = useSelector(selectCurrentPage);
+    const pages = totalCountPokemons / 20;
+
+    const changePage = (newPage: number) => {
+        //сюда потом прописать логику либо тоста об ошибке либо кнопку отключать на крайних страницах
+        if (newPage > 0 && newPage < pages)
+            dispatch(setCurrentPage(newPage));
+    }
+
     useEffect(() => {
-        dispatch(loadPokemons())
-    }, [dispatch])
+        dispatch(loadPokemons({page: currentPage}))
+    }, [dispatch, currentPage])
+
     return (
         <>
             <div className={styles.wrapper}>
@@ -29,6 +40,11 @@ const PokemonList = () => {
                     })
                 }
             </div>
+            <Pagination 
+            currentPage={currentPage}
+            totalPages={pages}
+            onPageChange={changePage}
+            />
         </>
     )
 }
