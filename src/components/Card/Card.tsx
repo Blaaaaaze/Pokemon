@@ -24,13 +24,11 @@ const Card = ({name, img, stats, types}: PokemonCard) => {
                     {
                         stats.map(stat => {
                             return (
-                                <>
                                 <Stat 
                                     name={stat.stat.name}
                                     value={stat.base_stat}
                                     key={`${name}-${stat.stat.name}`}
-                                />
-                                </>
+                                /> 
                             )
                         })
                     }

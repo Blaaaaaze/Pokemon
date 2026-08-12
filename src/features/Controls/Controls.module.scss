@@ -1,0 +1,24 @@
+@use '../../styles/_index' as styles;
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 1rem;
+    font-size: 1.8rem;
+
+}
+
+.search {
+    min-height: 2rem;
+    width: 40%;
+
+    @media (min-width: styles.$laptopL) {
+        min-height: 3.5rem;
+        width: 50%;
+        
+    }
+}
+
+.search-btn {
+    background-color: transparent;
+}
