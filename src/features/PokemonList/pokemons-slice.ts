@@ -1,33 +1,73 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Extra, Pokemon, PokemonListItem, PokemonLocal, Status } from "../../types";
-import { pokemonMapper } from "../../mappers/pokemonMapper";
+import type { Extra, Pokemon, PokemonCard, PokemonListItem, Status } from "../../types";
+import { pokemonMapperToCard } from "../../mappers/pokemonMapper";
+import type { RootState } from "../../store";
 
-export const loadPokemons = createAsyncThunk<
+export const loadAllPokemonsList = createAsyncThunk<
 {
-    pokemonList: PokemonLocal[], 
+    pokemonList: PokemonListItem[],
     count: number
 },
-{page: number},
+undefined,
 {
     extra: Extra
 }
 >(
+    '@@pokemons/load-all-pokemons',
+    async (_, {
+        extra: {client, api}
+    }) => {
+        const pokemonFetch = await client.get(api.allPokemons);
+        const pokemonList = pokemonFetch.data.results;
+        const count = pokemonFetch.data.count;
+
+        return {pokemonList, count};
+    }
+)
+
+export const loadPokemon = createAsyncThunk<
+    PokemonCard[],
+    PokemonListItem,
+    {
+        extra: Extra
+    }
+>(
+    '@@pokemon/load-pokemon-information',
+    async (pokemonItem, {
+        extra: {client}
+    }) => {
+        const pokemonFetch = await client.get(pokemonItem.url);
+        const pokemonData = pokemonMapperToCard(pokemonFetch.data);
+
+        return pokemonData;
+    }
+)
+
+export const loadPokemons = createAsyncThunk<
+PokemonCard[], 
+{page: number},
+{
+    extra: Extra,
+    state: RootState
+}
+>(
     '@@pokemons/load-pokemons',
     async ({ page }, {
-        extra: {client, api},
+        extra: {client},
+        getState,
     }) => {
-        const offset = (page - 1) * 20;
-        const pokemonFetch = await client.get(api.pokemonsPage(offset));
-        const count = pokemonFetch.data.count;
+        const start = (page - 1) * 20;
+        const pokemonsSlice = getState().pokemons.allPokemonsList.slice(start, start+getState().pokemons.pageSize || -1);
+
         const pokemonsData: Pokemon[] = await Promise.all(
-            pokemonFetch.data.results.map(async (pokemonItem: PokemonListItem) => {
+            pokemonsSlice.map(async (pokemonItem: PokemonListItem) => {
                 const pokemonInfo = await client.get(pokemonItem.url);
                 return pokemonInfo.data;
             })
         )
-        const pokemonList = pokemonMapper(pokemonsData);
+        const pokemonList = pokemonMapperToCard(pokemonsData);
 
-        return {pokemonList, count};
+        return pokemonList;
     }
 )
 
@@ -37,7 +77,8 @@ type PokemonSlice = {
     pageSize: number,
     totalCount: number
     error: string | null,
-    list: PokemonLocal[]
+    pagePokemonsList: PokemonCard[]
+    allPokemonsList: PokemonListItem[],
 }
 
 const initialState: PokemonSlice = {
@@ -46,7 +87,8 @@ const initialState: PokemonSlice = {
     pageSize: 20,
     totalCount: 0,
     error: null,
-    list: []
+    pagePokemonsList: [],
+    allPokemonsList: []
 }
 
 
@@ -60,18 +102,22 @@ const pokemonSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(loadPokemons.pending, (state) => {
-                state.status = 'loading';
-                state.error = null;
+            .addCase(loadPokemons.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.pagePokemonsList = action.payload;
             })
-            .addCase(loadPokemons.rejected, (state) => {
+            .addCase(loadAllPokemonsList.fulfilled, (state, action) => {
+                state.status = 'idle';
+                state.allPokemonsList = action.payload.pokemonList;
+                state.totalCount = action.payload.count
+            })
+            .addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
                 state.status = 'error';
                 state.error = 'Cannot load data';
             })
-            .addCase(loadPokemons.fulfilled, (state, action) => {
-                state.status = 'idle';
-                state.list = action.payload.pokemonList;
-                state.totalCount = action.payload.count
+            .addMatcher((action) => action.type.endsWith('/pending'), (state) => {
+                state.status = 'loading';
+                state.error = null;
             })
     }
 });
