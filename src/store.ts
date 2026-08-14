@@ -3,10 +3,12 @@ import { configureStore } from '@reduxjs/toolkit'
 import * as api from './config';
 import axios from 'axios';
 import { pokemonReducer } from './features/PokemonList/pokemons-slice';
+import {controlsReducer} from './features/Controls/controls-slice';
 
 export const store = configureStore({
     reducer: {
         pokemons: pokemonReducer,
+        controls: controlsReducer
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

@@ -1,7 +1,12 @@
+import { useAppDispatch } from "../../store";
 import type { PokemonTypeName } from "../../types";
 import styles from './Controls.module.scss';
+import { setType } from "./controls-slice";
+
 
 const Select = () => {
+    const dispatch = useAppDispatch();
+
     type TypeOption = {
         [TypeKey in PokemonTypeName]: { value: PokemonTypeName, label: PokemonTypeName }
     }
@@ -28,20 +33,32 @@ const Select = () => {
     };
 
     const typeOptions = Object.values(typeMap);
+    type FilterType = PokemonTypeName | '';
+
+    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>) => {
+        const value = e.target.value as FilterType
+        dispatch(setType(value))
+    }
 
 
     return (
         <>
-            <select name="typeSelect" id="typeSelect" className={styles.select}>
-                {
-                    typeOptions.map(({ value, label }) => {
-                        return (
-                            <option key={value} value={value} >
-                                {label}
-                            </option>
-                        )
-                    })
-                }
+            <select 
+                name="typeSelect" 
+                id="typeSelect" 
+                className={styles.select}
+                onChange={(e) => handleSelect(e)}
+                >
+                    <option value=''>all</option>
+                    {
+                        typeOptions.map(({ value, label }) => {
+                            return (
+                                <option key={value} value={value} >
+                                    {label}
+                                </option>
+                            )
+                        })
+                    }
             </select>
         </>
     )

@@ -59,11 +59,6 @@ export type Pokemon = {
     abilities: PokemonAbility[]
 }
 
-export type PokemonListItem = {
-    name: string,
-    url: string,
-}
-
 export type PokemonLocal = {
     name: string,
     id: number,

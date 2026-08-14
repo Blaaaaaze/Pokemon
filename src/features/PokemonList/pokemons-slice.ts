@@ -1,7 +1,14 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { Extra, Pokemon, PokemonCard, PokemonListItem, Status } from "../../types";
-import { pokemonMapperToCard } from "../../mappers/pokemonMapper";
-import type { RootState } from "../../store";
+import { pokemonListMapper, pokemonMapperToCard } from "../../mappers/pokemonMapper";
+import type { AppDispatch, RootState } from "../../store";
+
+interface PokemonListResponse {
+    count: number;
+    next: string | null;
+    previous: string | null;
+    results: PokemonListItem[];
+}
 
 export const loadAllPokemonsList = createAsyncThunk<
 {
@@ -17,47 +24,65 @@ undefined,
     async (_, {
         extra: {client, api}
     }) => {
-        const pokemonFetch = await client.get(api.allPokemons);
+        const pokemonFetch = await client.get<PokemonListResponse>(api.allPokemons);
         const pokemonList = pokemonFetch.data.results;
         const count = pokemonFetch.data.count;
 
         return {pokemonList, count};
     }
-)
+);
 
-export const loadPokemon = createAsyncThunk<
-    PokemonCard[],
-    PokemonListItem,
+export const loadPokemonsByType = createAsyncThunk<
+    undefined,
+    string,
     {
-        extra: Extra
+        extra: Extra,
+        state: RootState,
+        dispatch: AppDispatch
     }
 >(
-    '@@pokemon/load-pokemon-information',
-    async (pokemonItem, {
-        extra: {client}
+    '@@pokemons/load-pokemons-by-type',
+    async (pokemonType, {
+        extra: {client, api},
+        getState,
+        dispatch
     }) => {
-        const pokemonFetch = await client.get(pokemonItem.url);
-        const pokemonData = pokemonMapperToCard(pokemonFetch.data);
+        console.log(1)
+        const pokemonFetch = await client.get(api.pokemonsByType(pokemonType));
+        const pokemonList = pokemonFetch.data.pokemon;
+        const page = 1;
+        const search = getState().controls.search;
+        const mappedPokemonList = pokemonListMapper(pokemonList);
+        
 
-        return pokemonData;
+
+        dispatch(loadPokemons({pokemonList: mappedPokemonList, page, search})).unwrap();
     }
 )
 
 export const loadPokemons = createAsyncThunk<
 PokemonCard[], 
-{page: number},
+{
+    pokemonList: PokemonListItem[],
+    page: number,
+    search: string,
+},
 {
     extra: Extra,
     state: RootState
 }
 >(
     '@@pokemons/load-pokemons',
-    async ({ page }, {
+    async ({ pokemonList, page, search }, {
         extra: {client},
         getState,
     }) => {
+        // console.log(`${page}, ${search}`);
+        // console.log(pokemonList)
         const start = (page - 1) * 20;
-        const pokemonsSlice = getState().pokemons.allPokemonsList.slice(start, start+getState().pokemons.pageSize || -1);
+        const pokemonsSlice = pokemonList
+            .filter(pokemon => pokemon.name.includes(search.trim()))
+            .slice(start, start+getState().pokemons.pageSize || -1);
 
         const pokemonsData: Pokemon[] = await Promise.all(
             pokemonsSlice.map(async (pokemonItem: PokemonListItem) => {
@@ -65,9 +90,9 @@ PokemonCard[],
                 return pokemonInfo.data;
             })
         )
-        const pokemonList = pokemonMapperToCard(pokemonsData);
+        const pokemonCardsData = pokemonMapperToCard(pokemonsData);
 
-        return pokemonList;
+        return pokemonCardsData;
     }
 )
 

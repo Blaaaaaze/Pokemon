@@ -2,19 +2,23 @@ import { useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import { useAppDispatch} from '../../store';
 import styles from './PokemonList.module.scss';
-import { selectCurrentPage, selectPokemons, selectPokemonsCount, selectStatus } from './pokemons-selectors';
+import { selectAllPokemons, selectCurrentPage, selectPokemons, selectPokemonsCount, selectStatus } from './pokemons-selectors';
 import { useEffect } from 'react';
-import { loadAllPokemonsList, loadPokemons, setCurrentPage } from './pokemons-slice';
+import { loadAllPokemonsList, loadPokemons, loadPokemonsByType, setCurrentPage } from './pokemons-slice';
 import Pagination from '../../components/Pagination/Pagination';
+import { selectSearch, selectType } from '../Controls/controls-selectros';
 
 
 const PokemonList = () => {
     const dispatch = useAppDispatch();
+    const allPokemons = useSelector(selectAllPokemons);
     const pokemons = useSelector(selectPokemons);
     const totalCountPokemons = useSelector(selectPokemonsCount);
     const currentPage = useSelector(selectCurrentPage);
     const status = useSelector(selectStatus);
     const pages = totalCountPokemons / 20;
+    const search = useSelector(selectSearch);
+    const type = useSelector(selectType)
 
     const changePage = (newPage: number) => {
         //сюда потом прописать логику либо тоста об ошибке либо кнопку отключать на крайних страницах
@@ -29,10 +33,14 @@ const PokemonList = () => {
     }, []);
 
     useEffect(() => {
+        if (type) dispatch(loadPokemonsByType(type));
+    }, [type, dispatch])
+
+    useEffect(() => {
         if (totalCountPokemons) {
-            dispatch(loadPokemons({page: currentPage}))
+            dispatch(loadPokemons({pokemonList: allPokemons, page: currentPage, search: search}));
         }
-    }, [dispatch, currentPage, totalCountPokemons]);
+    }, [dispatch, currentPage, totalCountPokemons, search]);
 
     return (
         <>
