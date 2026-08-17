@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import { useAppDispatch} from '../../store';
 import styles from './PokemonList.module.scss';
-import { selectAllPokemons, selectCurrentPage, selectPokemons, selectPokemonsCount, selectStatus } from './pokemons-selectors';
+import { selectAllPokemons, selectCurrentPage, selectPokemons, selectPokemonsCount } from './pokemons-selectors';
 import { useEffect } from 'react';
-import { loadAllPokemonsList, loadPokemons, loadPokemonsByType, setCurrentPage } from './pokemons-slice';
+import { loadPokemons, loadPokemonsByType, setCurrentPage } from './pokemons-slice';
 import Pagination from '../../components/Pagination/Pagination';
 import { selectSearch, selectType } from '../Controls/controls-selectros';
 
@@ -15,7 +15,6 @@ const PokemonList = () => {
     const pokemons = useSelector(selectPokemons);
     const totalCountPokemons = useSelector(selectPokemonsCount);
     const currentPage = useSelector(selectCurrentPage);
-    const status = useSelector(selectStatus);
     const pages = totalCountPokemons / 20;
     const search = useSelector(selectSearch);
     const type = useSelector(selectType)
@@ -27,20 +26,18 @@ const PokemonList = () => {
     }
 
     useEffect(() => {
-        if (status === 'idle') {
-            dispatch(loadAllPokemonsList());
-        }
-    }, []);
+        dispatch(loadPokemonsByType(type));
+    }, [type, dispatch])
 
     useEffect(() => {
-        if (type) dispatch(loadPokemonsByType(type));
-    }, [type, dispatch])
+        dispatch(setCurrentPage(1))
+    }, [search])
 
     useEffect(() => {
         if (totalCountPokemons) {
             dispatch(loadPokemons({pokemonList: allPokemons, page: currentPage, search: search}));
         }
-    }, [dispatch, currentPage, totalCountPokemons, search]);
+    }, [dispatch, currentPage, totalCountPokemons, search, allPokemons]);
 
     return (
         <>

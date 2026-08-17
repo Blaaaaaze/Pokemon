@@ -29,7 +29,7 @@ export const pokemonMapperToCard = (pokemonsApiData: Pokemon[]): PokemonCard[] =
 
 export const pokemonListMapper = (pokemonsList: pokemonList[]): PokemonListItem[] => {
     const result = pokemonsList.map(pokemon => {
-        console.log(pokemon.pokemon.name)
+
         return (
             {
                 name: pokemon.pokemon.name,
