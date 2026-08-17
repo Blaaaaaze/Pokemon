@@ -8,7 +8,6 @@ const Controls = () => {
             <div className={styles.wrapper}>
                 <Search />
                 <Select />
-                <button className={styles['search-btn']}>Найти</button>
             </div>
         </>
     )

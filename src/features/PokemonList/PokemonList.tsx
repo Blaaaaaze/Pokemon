@@ -21,8 +21,14 @@ const PokemonList = () => {
 
     const changePage = (newPage: number) => {
         //сюда потом прописать логику либо тоста об ошибке либо кнопку отключать на крайних страницах
-        if (newPage > 0 && newPage < pages)
+        if (newPage > 0 && newPage < pages) {
             dispatch(setCurrentPage(newPage));
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+
     }
 
     useEffect(() => {
