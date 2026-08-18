@@ -4,5 +4,5 @@ export const basePokemonsUrl = BASE_URL + 'pokemon/';
 
 export const allPokemons = basePokemonsUrl + '?limit=10000&offset=0'
 export const pokemonsPage = (offset: number) => basePokemonsUrl + `?limit=20&offset=${offset}`;
-export const pokemonsByType = (type: string) => BASE_URL + `type/${type}/`;
+export const Type = (type: string) => BASE_URL + `type/${type}/`;
 export const pokemonData = (name: string) => basePokemonsUrl + name;

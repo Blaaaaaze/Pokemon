@@ -1,0 +1,52 @@
+@use '../../styles/_index.scss' as styles;
+
+.type {
+    &__container {
+        align-items: center;
+
+        @media (min-width: styles.$tablet) {
+            gap: 5rem;
+        }
+    }
+
+    &__icon {
+        width: 50%;
+
+        @media (min-width: styles.$tablet) {
+            width: 20%;
+        }
+
+        @media (min-width: styles.$desktop) {
+            width: 30%;
+        }
+    }
+
+    &__data {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__stats {
+        display: flex;
+        flex-direction: column;
+
+        @media (min-width: styles.$tablet) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem
+        }
+    }
+
+
+    &__types {
+        margin: 1rem 0;
+        width: 60%;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+}
+
+.sub-title {
+        margin: 0 0 1rem;
+}

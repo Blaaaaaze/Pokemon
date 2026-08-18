@@ -22,12 +22,12 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
         <>
         {
             pokemonData && (
-                <div className={styles.container}>
-                    <div className={styles.img}>
+                <div className="container">
+                    <div className='img'>
                         <img src={pokemonData.img} alt={pokemonData.name} />
                     </div>
                     <div className={styles.pokemon__data}>
-                        <h2 className={styles.pokemon__name}>{pokemonData.name}</h2>
+                        <h2 className="h2">{pokemonData.name}</h2>
                         <div className={styles.pokemon__parametres}>
                             <span className={styles.pokemon__parameter}>Weight: {pokemonData.weight}</span>
                             <span className={styles.pokemon__parameter}>Height: {pokemonData.height}</span>

@@ -28,7 +28,7 @@ export const loadPokemonsByType = createAsyncThunk<
         const page = 1;
             
         if (pokemonType) {
-            const pokemonFetch = await client.get(api.pokemonsByType(pokemonType));
+            const pokemonFetch = await client.get(api.Type(pokemonType));
             const pokemonList = pokemonFetch.data.pokemon;
             const mappedPokemonList = pokemonListMapper(pokemonList);
             const count = mappedPokemonList.length;

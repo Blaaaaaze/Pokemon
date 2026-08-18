@@ -5,12 +5,14 @@ import axios from 'axios';
 import { pokemonReducer } from './features/PokemonList/pokemons-slice';
 import {controlsReducer} from './features/Controls/controls-slice';
 import { pokemonDetailsReducer } from './features/PokemonDetails/pokemonDetails-slice';
+import { typeDetailsReducer } from './features/TypeDetails/typeDetails-slice';
 
 export const store = configureStore({
     reducer: {
         pokemons: pokemonReducer,
         controls: controlsReducer,
         pokemonDetails: pokemonDetailsReducer,
+        typeDetails: typeDetailsReducer
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
