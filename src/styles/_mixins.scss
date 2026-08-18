@@ -1,4 +1,10 @@
+@use './variables';
+
 @mixin h($_size, $_weight) {
     font-size: $_size;
     $weight: $_weight;
+
+    @media (min-width: variables.$desktop) {
+        font-size: ($_size+1.5);
+    }
 }

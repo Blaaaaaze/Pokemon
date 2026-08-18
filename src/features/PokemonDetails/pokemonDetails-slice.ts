@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { Extra, Pokemon, PokemonLocal, Status } from "../../types";
+import type { Ability, Extra, Pokemon, PokemonLocal, Status } from "../../types";
 import { pokemonMapper } from "../../mappers/pokemonMapper";
 
 export const loadPokemonData = createAsyncThunk<
@@ -15,7 +15,15 @@ string,
     }) => {
         const detailsFetch = await client.get<Pokemon>(api.pokemonData(name));
         const detailsData = detailsFetch.data;
-        const dataPokemonLocal = pokemonMapper(detailsData);
+        const abilities = detailsData.abilities;
+
+        const abilitiesData: Ability[] = await Promise.all(
+            abilities.map(async (item) => {
+                const abilityFetch = await client.get(item.ability.url);
+                return abilityFetch.data;
+            })
+        )
+        const dataPokemonLocal = pokemonMapper(detailsData, abilitiesData);
 
         return dataPokemonLocal;
     }

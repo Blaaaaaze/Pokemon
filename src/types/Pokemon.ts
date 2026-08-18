@@ -1,3 +1,5 @@
+import type { AbilityLocal } from "./ability";
+
 export type PokemonTypeName = 
 | 'normal'
 | 'fire'
@@ -26,7 +28,7 @@ type PokemonStat = {
     }
 }
 
-type PokemonAbility = {
+export type PokemonAbility = {
     ability: {
         name: string
         url: string
@@ -67,7 +69,7 @@ export type PokemonLocal = {
     weight: number,
     stats: PokemonStat[],
     types: PokemonType[],
-    abilities: PokemonAbility[]
+    abilities: AbilityLocal[]
 }
 
 export type PokemonCard = {

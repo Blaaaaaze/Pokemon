@@ -22,11 +22,12 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
         <>
         {
             pokemonData && (
+                <>
                 <div className="container">
                     <div className='img'>
                         <img src={pokemonData.img} alt={pokemonData.name} />
                     </div>
-                    <div className={styles.pokemon__data}>
+                    <section className={styles.pokemon__data}>
                         <h2 className="h2">{pokemonData.name}</h2>
                         <div className={styles.pokemon__parametres}>
                             <span className={styles.pokemon__parameter}>Weight: {pokemonData.weight}</span>
@@ -53,8 +54,24 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                                 })
                             }
                         </div>
-                    </div>
+                    </section>
                 </div>
+                <section className={styles.abilities}>
+                    <h3 className={`h3 ${styles['pokemon__sub-title']}`}>Abilities</h3>
+                    <div className={styles.abilities__container}>
+                        {
+                            pokemonData.abilities.map(ability => {
+                                return (
+                                    <div className={styles.ability__card} key={ability.name}>
+                                        <h4 className={styles['pokemon__sub-title']}>{ability.name}</h4>
+                                        <p>{ability.description}</p>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </section>
+            </>
             )
         }
         </>
