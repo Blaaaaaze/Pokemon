@@ -1,8 +1,8 @@
 import type { Pokemon, PokemonCard, PokemonLocal } from "../types";
 import type { pokemonList, PokemonListItem } from "../types/pokemonList";
 
-export const pokemonMapper = (pokemonsApiData: Pokemon[]): PokemonLocal[] => {
-    return pokemonsApiData.map(pokemon => (
+export const pokemonMapper = (pokemon: Pokemon): PokemonLocal => {
+    return (
         {
             name: pokemon.name,
             id: pokemon.id,
@@ -13,7 +13,7 @@ export const pokemonMapper = (pokemonsApiData: Pokemon[]): PokemonLocal[] => {
             height: pokemon.height,
             weight: pokemon.weight,
         }
-    ));
+    );
 }
 
 export const pokemonMapperToCard = (pokemonsApiData: Pokemon[]): PokemonCard[] => {

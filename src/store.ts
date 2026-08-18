@@ -4,11 +4,13 @@ import * as api from './config';
 import axios from 'axios';
 import { pokemonReducer } from './features/PokemonList/pokemons-slice';
 import {controlsReducer} from './features/Controls/controls-slice';
+import { pokemonDetailsReducer } from './features/PokemonDetails/pokemonDetails-slice';
 
 export const store = configureStore({
     reducer: {
         pokemons: pokemonReducer,
-        controls: controlsReducer
+        controls: controlsReducer,
+        pokemonDetails: pokemonDetailsReducer,
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

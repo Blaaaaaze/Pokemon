@@ -1,0 +1,5 @@
+@use './mixins';
+
+.h3 {
+    @include mixins.h(2.7rem, 600);
+}

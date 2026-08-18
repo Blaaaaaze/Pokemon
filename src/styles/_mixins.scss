@@ -1,0 +1,4 @@
+@mixin h($_size, $_weight) {
+    font-size: $_size;
+    $weight: $_weight;
+}
