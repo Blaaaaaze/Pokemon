@@ -2,12 +2,19 @@ import styles from './Card.module.scss';
 import type { PokemonCard } from '../../types';
 import Chip from '../Chip/Chip';
 import Stat from '../Stat/Stat';
+import { useNavigate } from 'react-router';
 
 
 
 const Card = ({name, img, stats, types}: PokemonCard) => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/pokemon/${name}`);
+    }
+
     return (
-        <div className={styles.card}>
+        <div className={styles.card} onClick={handleClick}>
             <div className={styles.card__image}>
                 <img src={img} alt={name} />
             </div>
