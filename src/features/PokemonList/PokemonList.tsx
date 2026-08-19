@@ -36,12 +36,19 @@ const PokemonList = () => {
     }, [type, dispatch])
 
     useEffect(() => {
-        dispatch(setCurrentPage(4))
+        dispatch(setCurrentPage(1))
     }, [search])
 
     useEffect(() => {
         if (totalCountPokemons) {
-            dispatch(loadPokemons({pokemonList: allPokemons, page: currentPage, search: search}));
+            const timer = setTimeout(() => {
+                dispatch(loadPokemons({pokemonList: allPokemons, page: currentPage, search: search}));
+            }, 500);
+
+            return () => {
+                clearTimeout(timer);
+            }
+            
         }
     }, [dispatch, currentPage, totalCountPokemons, search, allPokemons]);
 
