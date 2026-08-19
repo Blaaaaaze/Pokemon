@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Extra, Pokemon, PokemonCard, PokemonListItem, Status } from "../../types";
+import type { Extra, Pokemon, PokemonCard, PokemonListItem, PokemonTypeName, Status } from "../../types";
 import { pokemonListMapper, pokemonMapperToCard } from "../../mappers/pokemonMapper";
 import type { RootState } from "../../store";
 
@@ -10,23 +10,25 @@ interface PokemonListResponse {
     results: PokemonListItem[];
 }
 
+interface LoadPokemonsByTypeParams {
+    pokemonType: "" | PokemonTypeName,
+}
+
 export const loadPokemonsByType = createAsyncThunk<
     {
         pokemonList: PokemonListItem[],
         count: number,
-        page: number
     },
-    string | undefined,
+    LoadPokemonsByTypeParams,
     {
         extra: Extra,
     }
 >(
     '@@pokemons/load-pokemons-by-type',
-    async (pokemonType, {
+    async ({
+        pokemonType}, {
         extra: {client, api},
     }) => {
-        const page = 1;
-            
         if (pokemonType) {
             const pokemonFetch = await client.get(api.Type(pokemonType));
             const pokemonList = pokemonFetch.data.pokemon;
@@ -34,14 +36,14 @@ export const loadPokemonsByType = createAsyncThunk<
             const count = mappedPokemonList.length;
 
             
-            return {pokemonList: mappedPokemonList, count, page};
+            return {pokemonList: mappedPokemonList, count};
         }
 
         const pokemonFetch = await client.get<PokemonListResponse>(api.allPokemons);
         const pokemonList = pokemonFetch.data.results;
         const count = pokemonFetch.data.count;
 
-        return {pokemonList, count, page};
+        return {pokemonList, count};
     }
 )
 
@@ -119,7 +121,7 @@ const pokemonSlice = createSlice({
                 state.status = 'idle';
                 state.allPokemonsList = action.payload.pokemonList;
                 state.totalCount = action.payload.count;
-                state.currentPage = action.payload.page;
+                
             })
             .addMatcher((action) => action.type.endsWith('/rejected'), (state) => {
                 state.status = 'error';

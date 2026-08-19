@@ -31,12 +31,8 @@ const PokemonList = () => {
     }
 
     useEffect(() => {
-        dispatch(loadPokemonsByType(type));
+        dispatch(loadPokemonsByType({pokemonType: type}));
     }, [type, dispatch])
-
-    useEffect(() => {
-        dispatch(setCurrentPage(1))
-    }, [search])
 
     useEffect(() => {
         if (totalCountPokemons) {

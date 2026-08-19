@@ -40,7 +40,6 @@ export const Home = () => {
             if (type) {
                 params.set('type', type);
             }
-
             if (page > 1) {
                 params.set('page', String(page));
             }
@@ -50,7 +49,7 @@ export const Home = () => {
 
         return () => clearTimeout(timer);
         
-    }, [search, type, page]);
+    }, [search, type, page, searchParams]);
 
     return (
         <>
