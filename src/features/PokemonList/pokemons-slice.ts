@@ -48,7 +48,9 @@ export const loadPokemonsByType = createAsyncThunk<
 )
 
 export const loadPokemons = createAsyncThunk<
-PokemonCard[], 
+{
+    pokemonCardsData: PokemonCard[],
+    count: number}, 
 {
     pokemonList: PokemonListItem[],
     page: number,
@@ -66,9 +68,10 @@ PokemonCard[],
     }) => {
         
         const start = (page - 1) * 20;
-        const pokemonsSlice = pokemonList
-            .filter(pokemon => pokemon.name.includes(search.trim()))
-            .slice(start, start+getState().pokemons.pageSize || -1);
+        const pokemonsFilter = pokemonList
+            .filter(pokemon => pokemon.name.includes(search.trim()));
+        const count = pokemonsFilter.length;
+        const pokemonsSlice = pokemonsFilter.slice(start, start+getState().pokemons.pageSize || -1);
 
         const pokemonsData: Pokemon[] = await Promise.all(
             pokemonsSlice.map(async (pokemonItem: PokemonListItem) => {
@@ -78,7 +81,7 @@ PokemonCard[],
         )
         const pokemonCardsData = pokemonMapperToCard(pokemonsData);
 
-        return pokemonCardsData;
+        return {pokemonCardsData, count};
     }
 )
 
@@ -115,7 +118,8 @@ const pokemonSlice = createSlice({
         builder
             .addCase(loadPokemons.fulfilled, (state, action) => {
                 state.status = 'idle';
-                state.pagePokemonsList = action.payload;
+                state.pagePokemonsList = action.payload.pokemonCardsData;
+                state.totalCount = action.payload.count;
             })
             .addCase(loadPokemonsByType.fulfilled, (state, action) => {
                 state.status = 'idle';
