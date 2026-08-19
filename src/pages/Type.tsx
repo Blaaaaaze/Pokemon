@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router";
 import TypeDetails from "../features/TypeDetails/TypeDetails";
+import { Link } from "react-router";
 
 export const Type = () => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export const Type = () => {
             {
                 type && <TypeDetails type={type}/>
             }
+            <Link to={`/?type=${type}`} className='link'>View pokemons</Link>
         </div>
     )
 }
