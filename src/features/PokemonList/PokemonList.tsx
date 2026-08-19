@@ -28,7 +28,6 @@ const PokemonList = () => {
                 behavior: 'smooth',
             });
         }
-
     }
 
     useEffect(() => {
