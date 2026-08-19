@@ -15,13 +15,13 @@ const PokemonList = () => {
     const pokemons = useSelector(selectPokemons);
     const totalCountPokemons = useSelector(selectPokemonsCount);
     const currentPage = useSelector(selectCurrentPage);
-    const pages = totalCountPokemons / 20;
+    const pages = Math.ceil(totalCountPokemons / 20) ;
     const search = useSelector(selectSearch);
     const type = useSelector(selectType)
 
     const changePage = (newPage: number) => {
         //сюда потом прописать логику либо тоста об ошибке либо кнопку отключать на крайних страницах
-        if (newPage > 0 && newPage < pages) {
+        if (newPage > 0 && newPage <= pages) {
             dispatch(setCurrentPage(newPage));
             window.scrollTo({
                 top: 0,
@@ -36,7 +36,7 @@ const PokemonList = () => {
     }, [type, dispatch])
 
     useEffect(() => {
-        dispatch(setCurrentPage(1))
+        dispatch(setCurrentPage(4))
     }, [search])
 
     useEffect(() => {

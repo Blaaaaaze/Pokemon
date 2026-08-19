@@ -92,7 +92,7 @@ type PokemonSlice = {
 
 const initialState: PokemonSlice = {
     status: 'idle',
-    currentPage: 1,
+    currentPage: 4,
     pageSize: 20,
     totalCount: 0,
     error: null,
