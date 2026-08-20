@@ -45,13 +45,13 @@ const Pagination = ({totalPages, currentPage, onPageChange}: PaginationProps) =>
         ];
     };
 
-    const pagination = getPagination(currentPage, totalPages)
+    const pagination = getPagination(currentPage, totalPages);
 
     return (
         <div className={styles['button-container']}>
             {
                 pagination.map((item, index) => {
-                   return typeof item !== 'number' ? (
+                    return typeof item !== 'number' ? (
                         <span key={`dots-${index}`}>
                             ...
                         </span>
@@ -63,11 +63,11 @@ const Pagination = ({totalPages, currentPage, onPageChange}: PaginationProps) =>
                         >
                             {item}
                         </button>
-                    )
+                    );
                 })
             }
         </div>
-    )
-}
+    );
+};
 
 export default Pagination;

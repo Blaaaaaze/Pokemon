@@ -1,4 +1,4 @@
-import type { AbilityLocal } from "./ability";
+import type { AbilityLocal } from './ability';
 
 export type PokemonTypeName = 
 | 'normal'

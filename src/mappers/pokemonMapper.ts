@@ -1,5 +1,5 @@
-import type { Ability, Pokemon, PokemonCard, PokemonLocal } from "../types";
-import type { pokemonList, PokemonListItem } from "../types/pokemonList";
+import type { Ability, Pokemon, PokemonCard, PokemonLocal } from '../types';
+import type { pokemonList, PokemonListItem } from '../types/pokemonList';
 
 export const pokemonMapper = (pokemon: Pokemon, abilities: Ability[]): PokemonLocal => {
     return (
@@ -14,27 +14,27 @@ export const pokemonMapper = (pokemon: Pokemon, abilities: Ability[]): PokemonLo
                 
                 return {
                     name: ability.name,
-                    description: engDecription ? engDecription.effect : "Hasn't description",
-                    short_description: engDecription ? engDecription.short_effect : "Hasn't description",
-                }
+                    description: engDecription ? engDecription.effect : 'Hasn\'t description',
+                    short_description: engDecription ? engDecription.short_effect : 'Hasn\'t description',
+                };
             }
             ),
             height: pokemon.height,
             weight: pokemon.weight,
         }
     );
-}
+};
 
 export const pokemonMapperToCard = (pokemonsApiData: Pokemon[]): PokemonCard[] => {
     return pokemonsApiData.map(pokemon => (
         {
-                name: pokemon.name,
-                img: pokemon.sprites.other['official-artwork'].front_default,
-                stats: pokemon.stats,
-                types: pokemon.types,
+            name: pokemon.name,
+            img: pokemon.sprites.other['official-artwork'].front_default,
+            stats: pokemon.stats,
+            types: pokemon.types,
         }
-    ))
-}
+    ));
+};
 
 export const pokemonListMapper = (pokemonsList: pokemonList[]): PokemonListItem[] => {
     const result = pokemonsList.map(pokemon => {
@@ -44,7 +44,7 @@ export const pokemonListMapper = (pokemonsList: pokemonList[]): PokemonListItem[
                 name: pokemon.pokemon.name,
                 url: pokemon.pokemon.url
             }
-        )
-    })
+        );
+    });
     return result;
-}
+};

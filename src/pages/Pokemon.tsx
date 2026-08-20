@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from "react-router"
-import PokemonDetails from "../features/PokemonDetails/PokemonDetails";
+import { useNavigate, useParams } from 'react-router';
+import PokemonDetails from '../features/PokemonDetails/PokemonDetails';
 
 export const Pokemon = () => {
     const navigate = useNavigate();
@@ -12,5 +12,5 @@ export const Pokemon = () => {
                 name && <PokemonDetails name={name} />
             }
         </div>
-    )
-}
+    );
+};

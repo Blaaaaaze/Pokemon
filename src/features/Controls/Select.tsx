@@ -1,4 +1,4 @@
-import type { PokemonTypeName } from "../../types";
+import type { PokemonTypeName } from '../../types';
 import styles from './Controls.module.scss';
 
 interface SelectProps {
@@ -18,20 +18,20 @@ const Select = ({options, onChange}: SelectProps) => {
                 id="typeSelect" 
                 className={styles.select}
                 onChange={(e) => onChange(e)}
-                >
-                    <option value=''>all</option>
-                    {
-                        options.map(({ value, label }) => {
-                            return (
-                                <option key={value} value={value} >
-                                    {label}
-                                </option>
-                            )
-                        })
-                    }
+            >
+                <option value=''>all</option>
+                {
+                    options.map(({ value, label }) => {
+                        return (
+                            <option key={value} value={value} >
+                                {label}
+                            </option>
+                        );
+                    })
+                }
             </select>
         </>
-    )
-}
+    );
+};
 
 export default Select;

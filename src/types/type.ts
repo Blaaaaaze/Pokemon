@@ -15,8 +15,8 @@ export type Type = {
     id: number,
     name: string,
     sprites: {
-        "generation-ix": {
-            "scarlet-violet": {
+        'generation-ix': {
+            'scarlet-violet': {
                 symbol_icon: string
             }
         }

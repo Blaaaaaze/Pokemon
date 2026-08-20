@@ -1,6 +1,6 @@
-import { useNavigate, useParams } from "react-router";
-import TypeDetails from "../features/TypeDetails/TypeDetails";
-import { Link } from "react-router";
+import { useNavigate, useParams } from 'react-router';
+import TypeDetails from '../features/TypeDetails/TypeDetails';
+import { Link } from 'react-router';
 
 export const Type = () => {
     const navigate = useNavigate();
@@ -14,5 +14,5 @@ export const Type = () => {
             }
             <Link to={`/?type=${type}`} className='link'>View pokemons</Link>
         </div>
-    )
-}
+    );
+};

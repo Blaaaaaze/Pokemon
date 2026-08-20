@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { Extra, Status, Type } from "../../types";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { Extra, Status, Type } from '../../types';
 
 export const loadTypeData = createAsyncThunk<
 Type,
@@ -17,7 +17,7 @@ string,
 
         return detailsData;
     }
-)
+);
 
 interface TypeDetailsSlice {
     status: Status,
@@ -29,7 +29,7 @@ const initialState: TypeDetailsSlice = {
     status: 'idle',
     error: null,
     currentType: null
-}
+};
 
 const TypeDetailsSlice = createSlice({
     name: '@@type-details',
@@ -49,7 +49,7 @@ const TypeDetailsSlice = createSlice({
             .addMatcher((action) => action.type.endsWith('/pending'), (state) => {
                 state.status = 'loading';
                 state.error = null;
-            })
+            });
     }
 });
 

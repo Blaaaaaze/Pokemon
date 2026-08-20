@@ -1,7 +1,7 @@
-import { createAsyncThunk, createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { Extra, Pokemon, PokemonCard, PokemonListItem, PokemonTypeName, Status } from "../../types";
-import { pokemonListMapper, pokemonMapperToCard } from "../../mappers/pokemonMapper";
-import type { RootState } from "../../store";
+import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { Extra, Pokemon, PokemonCard, PokemonListItem, PokemonTypeName, Status } from '../../types';
+import { pokemonListMapper, pokemonMapperToCard } from '../../mappers/pokemonMapper';
+import type { RootState } from '../../store';
 
 interface PokemonListResponse {
     count: number;
@@ -11,7 +11,7 @@ interface PokemonListResponse {
 }
 
 interface LoadPokemonsByTypeParams {
-    pokemonType: "" | PokemonTypeName,
+    pokemonType: '' | PokemonTypeName,
 }
 
 export const loadPokemonsByType = createAsyncThunk<
@@ -45,7 +45,7 @@ export const loadPokemonsByType = createAsyncThunk<
 
         return {pokemonList, count};
     }
-)
+);
 
 export const loadPokemons = createAsyncThunk<
 {
@@ -78,12 +78,12 @@ export const loadPokemons = createAsyncThunk<
                 const pokemonInfo = await client.get(pokemonItem.url);
                 return pokemonInfo.data;
             })
-        )
+        );
         const pokemonCardsData = pokemonMapperToCard(pokemonsData);
 
         return {pokemonCardsData, count};
     }
-)
+);
 
 type PokemonSlice = {
     status: Status,
@@ -103,7 +103,7 @@ const initialState: PokemonSlice = {
     error: null,
     pagePokemonsList: [],
     allPokemonsList: []
-}
+};
 
 
 const pokemonSlice = createSlice({
@@ -134,7 +134,7 @@ const pokemonSlice = createSlice({
             .addMatcher((action) => action.type.endsWith('/pending'), (state) => {
                 state.status = 'loading';
                 state.error = null;
-            })
+            });
     }
 });
 

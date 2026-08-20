@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore } from '@reduxjs/toolkit';
 import * as api from './config';
 import axios from 'axios';
 import { pokemonReducer } from './features/PokemonList/pokemons-slice';
@@ -23,7 +23,7 @@ export const store = configureStore({
             }
         }
     })
-})
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

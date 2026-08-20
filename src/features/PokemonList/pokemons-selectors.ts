@@ -1,4 +1,4 @@
-import type { RootState } from "../../store";
+import type { RootState } from '../../store';
 
 export const selectAllPokemons = (state: RootState) => state.pokemons.allPokemonsList;
 export const selectPokemons = (state: RootState) => state.pokemons.pagePokemonsList;

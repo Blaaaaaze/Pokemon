@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { Ability, Extra, Pokemon, PokemonLocal, Status } from "../../types";
-import { pokemonMapper } from "../../mappers/pokemonMapper";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { Ability, Extra, Pokemon, PokemonLocal, Status } from '../../types';
+import { pokemonMapper } from '../../mappers/pokemonMapper';
 
 export const loadPokemonData = createAsyncThunk<
 PokemonLocal,
@@ -22,12 +22,12 @@ string,
                 const abilityFetch = await client.get(item.ability.url);
                 return abilityFetch.data;
             })
-        )
+        );
         const dataPokemonLocal = pokemonMapper(detailsData, abilitiesData);
 
         return dataPokemonLocal;
     }
-)
+);
 
 interface PokemonDetailsSlice {
     status: Status,
@@ -39,7 +39,7 @@ const initialState: PokemonDetailsSlice = {
     status: 'idle',
     error: null,
     currentPokemon: null
-}
+};
 
 const PokemonDetails = createSlice({
     name: '@@pokemon-details',
@@ -59,7 +59,7 @@ const PokemonDetails = createSlice({
             .addMatcher((action) => action.type.endsWith('/pending'), (state) => {
                 state.status = 'loading';
                 state.error = null;
-            })
+            });
     }
 });
 

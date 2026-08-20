@@ -1,14 +1,14 @@
-import { useSearchParams } from "react-router";
-import Controls from "../features/Controls/Controls";
-import PokemonList from "../features/PokemonList/PokemonList";
-import { selectSearch, selectType } from "../features/Controls/controls-selectros";
-import { useSelector } from "react-redux";
-import { selectCurrentPage } from "../features/PokemonList/pokemons-selectors";
-import { useEffect } from "react";
-import { useAppDispatch } from "../store";
-import { setSearch, setType } from "../features/Controls/controls-slice";
-import { setCurrentPage } from "../features/PokemonList/pokemons-slice";
-import type { FilterType } from "../types";
+import { useSearchParams } from 'react-router';
+import Controls from '../features/Controls/Controls';
+import PokemonList from '../features/PokemonList/PokemonList';
+import { selectSearch, selectType } from '../features/Controls/controls-selectros';
+import { useSelector } from 'react-redux';
+import { selectCurrentPage } from '../features/PokemonList/pokemons-selectors';
+import { useEffect } from 'react';
+import { useAppDispatch } from '../store';
+import { setSearch, setType } from '../features/Controls/controls-slice';
+import { setCurrentPage } from '../features/PokemonList/pokemons-slice';
+import type { FilterType } from '../types';
 
 export const Home = () => {
 
@@ -27,7 +27,7 @@ export const Home = () => {
         dispatch(setSearch(searchParam));
         dispatch(setType(typeParam as FilterType));
         dispatch(setCurrentPage(pageParam));
-    }, [])
+    }, []);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -53,8 +53,8 @@ export const Home = () => {
 
     return (
         <>
-        <Controls />
-        <PokemonList />
+            <Controls />
+            <PokemonList />
         </>
     );
-}
+};

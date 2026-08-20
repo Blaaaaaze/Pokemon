@@ -1,11 +1,11 @@
-import Search from "./Search";
-import Select from "./Select";
+import Search from './Search';
+import Select from './Select';
 import styles from './Controls.module.scss';
-import { useAppDispatch } from "../../store";
-import { useSelector } from "react-redux";
-import { selectSearch } from "./controls-selectros";
-import { setSearch, setType } from "./controls-slice";
-import type { FilterType, PokemonTypeName } from "../../types";
+import { useAppDispatch } from '../../store';
+import { useSelector } from 'react-redux';
+import { selectSearch } from './controls-selectros';
+import { setSearch, setType } from './controls-slice';
+import type { FilterType, PokemonTypeName } from '../../types';
 
 
 const Controls = () => {
@@ -14,7 +14,7 @@ const Controls = () => {
     
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
         dispatch(setSearch(e.target.value));
-    }
+    };
 
     type TypeOption = {
         [TypeKey in PokemonTypeName]: { value: PokemonTypeName, label: PokemonTypeName }
@@ -44,9 +44,9 @@ const Controls = () => {
     const typeOptions = Object.values(typeMap);
 
     const handleSelect = (e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>) => {
-        const value = e.target.value as FilterType
-        dispatch(setType(value))
-    }
+        const value = e.target.value as FilterType;
+        dispatch(setType(value));
+    };
     
     return (
         <>
@@ -55,7 +55,7 @@ const Controls = () => {
                 <Select options={typeOptions} onChange={handleSelect}/>
             </div>
         </>
-    )
-}
+    );
+};
 
 export default Controls;

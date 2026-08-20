@@ -11,7 +11,7 @@ const Card = ({name, img, stats, types}: PokemonCard) => {
 
     const handleClick = () => {
         navigate(`/pokemon/${name}`);
-    }
+    };
 
     return (
         <div className={styles.card} onClick={handleClick}>
@@ -36,14 +36,14 @@ const Card = ({name, img, stats, types}: PokemonCard) => {
                                     value={stat.base_stat}
                                     key={`${name}-${stat.stat.name}`}
                                 /> 
-                            )
+                            );
                         })
                     }
                 </div>
                 
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Card;

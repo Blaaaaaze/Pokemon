@@ -1,5 +1,5 @@
-import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { PokemonTypeName } from "../../types";
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
+import type { PokemonTypeName } from '../../types';
 
 type controlsSlice = {
     search: string,
@@ -9,7 +9,7 @@ type controlsSlice = {
 const initialState: controlsSlice = {
     search: '',
     type: ''
-}
+};
 
 const controlsSlice = createSlice({
     name: '@@controls',
@@ -26,4 +26,4 @@ const controlsSlice = createSlice({
 });
 
 export const controlsReducer = controlsSlice.reducer;
-export const {setSearch, setType, clearControls} = controlsSlice.actions
+export const {setSearch, setType, clearControls} = controlsSlice.actions;

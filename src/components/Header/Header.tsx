@@ -10,7 +10,7 @@ const Header = () => {
                 </h1>
             </Link>
         </header>
-    )
-}
+    );
+};
 
 export default Header;

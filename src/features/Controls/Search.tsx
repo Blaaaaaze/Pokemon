@@ -19,7 +19,7 @@ const Search = ({value, onChange}: SearchProps) => {
             />
 
         </>
-    )
-}
+    );
+};
 
 export default Search;
