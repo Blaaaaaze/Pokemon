@@ -7,9 +7,6 @@ interface ChipProps {
 
 const Chip = ({text}: ChipProps) => {
     const navigate = useNavigate();
-
-
-
     const handleClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
         navigate(`/${text}`);

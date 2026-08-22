@@ -9,28 +9,26 @@ interface SelectProps {
     onChange: (e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>) => void
 }
 
-const Select = ({options, onChange}: SelectProps) => {
-    return (
-        <>
-            <select 
-                name="typeSelect" 
-                id="typeSelect" 
-                className={styles.select}
-                onChange={(e) => onChange(e)}
-            >
-                <option value=''>all</option>
-                {
-                    options.map(({ value, label }) => {
-                        return (
-                            <option key={value} value={value} >
-                                {label}
-                            </option>
-                        );
-                    })
-                }
-            </select>
-        </>
-    );
-};
+const Select = ({options, onChange}: SelectProps) => (
+    <>
+        <select 
+            name="typeSelect" 
+            id="typeSelect" 
+            className={styles.select}
+            onChange={(e) => onChange(e)}
+        >
+            <option value=''>all</option>
+            {
+                options.map(({ value, label }) => {
+                    return (
+                        <option key={value} value={value} >
+                            {label}
+                        </option>
+                    );
+                })
+            }
+        </select>
+    </>
+);
 
 export default Select;
