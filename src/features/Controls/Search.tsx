@@ -6,7 +6,6 @@ interface SearchProps {
 }
 
 const Search = ({value, onChange}: SearchProps) => {
-
     return (
         <>
             <input 

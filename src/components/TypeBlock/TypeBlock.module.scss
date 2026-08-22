@@ -1,0 +1,13 @@
+.infoblock {
+    &__types {
+        margin: 1rem 0;
+        width: 60%;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    &__sub-title {
+        margin: 0 0 1rem;
+    }
+}

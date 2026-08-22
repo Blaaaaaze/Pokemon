@@ -20,7 +20,7 @@ export type PokemonTypeName =
 | 'steel'
 | 'fairy';
 
-type PokemonStat = {
+export type PokemonStat = {
     base_stat: number,
     stat: {
         name: string,
@@ -35,7 +35,7 @@ export type PokemonAbility = {
     }
 }
 
-type PokemonType = {
+export type PokemonType = {
     slot: number,
     type: {
         name: PokemonTypeName,

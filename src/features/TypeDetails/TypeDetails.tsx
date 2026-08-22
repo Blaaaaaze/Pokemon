@@ -4,7 +4,7 @@ import { selectTypeData } from './typeDetails-selectors';
 import { useEffect } from 'react';
 import { loadTypeData } from './typeDetails-slice';
 import styles from './TypeDetails.module.scss';
-import Chip from '../../components/Chip/Chip';
+import TypeBlock from '../../components/TypeBlock/TypeBlock';
 
 interface TypeDetailsProps {
     type: string
@@ -28,68 +28,13 @@ const TypeDetails = ({type}: TypeDetailsProps) => {
                         </div>
                         <div className={styles.type__data}>
                             <h2 className="h2">{typeData.name}</h2>
-                            {/* Вот это надо рефаторить жестко */}
                             <div className={styles.type__stats}>
-                                <div className={styles.type__stat}>
-                                    <h3 className={`h3 ${styles['sub-title']}`}>Double Damage From</h3>
-                                    <div className={styles.type__types}>
-                                        {
-                                            typeData.damage_relations.double_damage_from.map(type => {
-                                                return <Chip text={type.name} key={`${type}-${type.name}`}/>;
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.type__stat}>
-                                    <h3 className={`h3 ${styles['sub-title']}`}>Double Damage To</h3>
-                                    <div className={styles.type__types}>
-                                        {
-                                            typeData.damage_relations.double_damage_to.map(type => {
-                                                return <Chip text={type.name} key={`${type}-${type.name}`}/>;
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.type__stat}>
-                                    <h3 className={`h3 ${styles['sub-title']}`}>Half Damage From</h3>
-                                    <div className={styles.type__types}>
-                                        {
-                                            typeData.damage_relations.half_damage_from.map(type => {
-                                                return <Chip text={type.name} key={`${type}-${type.name}`}/>;
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.type__stat}>
-                                    <h3 className={`h3 ${styles['sub-title']}`}>Half Damage To</h3>
-                                    <div className={styles.type__types}>
-                                        {
-                                            typeData.damage_relations.half_damage_to.map(type => {
-                                                return <Chip text={type.name} key={`${type}-${type.name}`}/>;
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.type__stat}>
-                                    <h3 className={`h3 ${styles['sub-title']}`}>No Damage From</h3>
-                                    <div className={styles.type__types}>
-                                        {
-                                            typeData.damage_relations.no_damage_from.map(type => {
-                                                return <Chip text={type.name} key={`${type}-${type.name}`}/>;
-                                            })
-                                        }
-                                    </div>
-                                </div>
-                                <div className={styles.type__stat}>
-                                    <h3 className={`h3 ${styles['sub-title']}`}>No Damage To</h3>
-                                    <div className={styles.type__types}>
-                                        {
-                                            typeData.damage_relations.no_damage_to.map(type => {
-                                                return <Chip text={type.name} key={`${type}-${type.name}`}/>;
-                                            })
-                                        }
-                                    </div>
-                                </div>
+                                <TypeBlock title='Double Damage From' types={typeData.damage_relations.double_damage_from}/>
+                                <TypeBlock title='Double Damage To' types={typeData.damage_relations.double_damage_to}/>
+                                <TypeBlock title='Half Damage From' types={typeData.damage_relations.half_damage_from}/>
+                                <TypeBlock title='Half Damage To' types={typeData.damage_relations.half_damage_to}/>
+                                <TypeBlock title='No Damage From' types={typeData.damage_relations.no_damage_from}/>
+                                <TypeBlock title='No Damage To' types={typeData.damage_relations.no_damage_to}/>
                             </div>
                         </div>
                     </div>

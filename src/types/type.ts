@@ -1,16 +1,13 @@
-type defaultApiItem = {
-    name: string,
-    url: string
-}
+import type { ApiItem } from './api-item';
 
 export type Type = {
     damage_relations: {
-        double_damage_from: defaultApiItem[]
-        double_damage_to: defaultApiItem[],
-        half_damage_from: defaultApiItem[],
-        half_damage_to: defaultApiItem[],
-        no_damage_from: defaultApiItem[],
-        no_damage_to: defaultApiItem[],
+        double_damage_from: ApiItem[]
+        double_damage_to: ApiItem[],
+        half_damage_from: ApiItem[],
+        half_damage_to: ApiItem[],
+        no_damage_from: ApiItem[],
+        no_damage_to: ApiItem[],
     },
     id: number,
     name: string,

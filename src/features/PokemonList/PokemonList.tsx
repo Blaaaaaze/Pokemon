@@ -6,7 +6,7 @@ import { selectAllPokemons, selectCurrentPage, selectPokemons, selectPokemonsCou
 import { useEffect } from 'react';
 import { loadPokemons, loadPokemonsByType, setCurrentPage } from './pokemons-slice';
 import Pagination from '../../components/Pagination/Pagination';
-import { selectSearch, selectType } from '../Controls/controls-selectros';
+import { selectControls } from '../Controls/controls-selectros';
 
 
 const PokemonList = () => {
@@ -15,12 +15,11 @@ const PokemonList = () => {
     const pokemons = useSelector(selectPokemons);
     const totalCountPokemons = useSelector(selectPokemonsCount);
     const currentPage = useSelector(selectCurrentPage);
+    const { search, type } = useSelector(selectControls);
+    
     const pages = Math.ceil(totalCountPokemons / 20) ;
-    const search = useSelector(selectSearch);
-    const type = useSelector(selectType);
 
     const changePage = (newPage: number) => {
-        //сюда потом прописать логику либо тоста об ошибке либо кнопку отключать на крайних страницах
         if (newPage > 0 && newPage <= pages) {
             dispatch(setCurrentPage(newPage));
             window.scrollTo({

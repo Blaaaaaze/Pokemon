@@ -5,3 +5,4 @@ export * from './pokemonList';
 export * from './type';
 export * from './ability';
 export * from './filter';
+export * from './api-item';

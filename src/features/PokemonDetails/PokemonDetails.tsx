@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { loadPokemonData } from './pokemonDetails-slice';
 import Chip from '../../components/Chip/Chip';
 import Stat from '../../components/Stat/Stat';
+import ChipList from '../../components/ChipList/ChipList';
 
 interface PokemonDetailsProps {
     name: string
@@ -34,13 +35,7 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                                     <span className={styles.pokemon__parameter}>Weight: {pokemonData.weight}</span>
                                     <span className={styles.pokemon__parameter}>Height: {pokemonData.height}</span>
                                 </div>
-                                <div className={styles.pokemon__types}>
-                                    {
-                                        pokemonData.types.map(type => {
-                                            return <Chip text={type.type.name} key={`${name}-${type.type.name}`}/>;
-                                        })
-                                    }
-                                </div>
+                                <ChipList chipContentList={pokemonData.types}/>
                                 <h3 className={`h3 ${styles['pokemon__sub-title']}`}>Stats</h3>
                                 <div className={styles.pokemon__stats}>
                                     {

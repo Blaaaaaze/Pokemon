@@ -1,8 +1,8 @@
 import styles from './Card.module.scss';
 import type { PokemonCard } from '../../types';
-import Chip from '../Chip/Chip';
-import Stat from '../Stat/Stat';
 import { useNavigate } from 'react-router';
+import ChipList from '../ChipList/ChipList';
+import StatList from '../StatList/StatList';
 
 
 
@@ -20,27 +20,8 @@ const Card = ({name, img, stats, types}: PokemonCard) => {
             </div>
             <div className={styles.card__content}>
                 <h3 className={styles.card__title}>{name}</h3>
-                <div className={styles.card__types}>
-                    {
-                        types.map(type => (
-                            <Chip text={type.type.name} key={`${name}-${type.type.name}`}/>
-                        ))
-                    }
-                </div>
-                <div className={styles.card__stats}>
-                    {
-                        stats.map(stat => {
-                            return (
-                                <Stat 
-                                    name={stat.stat.name}
-                                    value={stat.base_stat}
-                                    key={`${name}-${stat.stat.name}`}
-                                /> 
-                            );
-                        })
-                    }
-                </div>
-                
+                <ChipList chipContentList={types} />
+                <StatList stats={stats}/>
             </div>
         </div>
     );

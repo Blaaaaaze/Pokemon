@@ -10,7 +10,6 @@ interface SelectProps {
 }
 
 const Select = ({options, onChange}: SelectProps) => {
-
     return (
         <>
             <select 
