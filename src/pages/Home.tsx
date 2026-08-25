@@ -4,13 +4,14 @@ import PokemonList from '../features/PokemonList/PokemonList';
 import { selectSearch, selectType } from '../features/Controls/controls-selectros';
 import { useSelector } from 'react-redux';
 import { selectCurrentPage } from '../features/PokemonList/pokemons-selectors';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppDispatch } from '../store';
 import { setSearch, setType } from '../features/Controls/controls-slice';
 import { setCurrentPage } from '../features/PokemonList/pokemons-slice';
 import type { FilterType } from '../types';
 
 export const Home = () => {
+    const [initialized, setInitialized] = useState(false);
 
     const search = useSelector(selectSearch);
     const type = useSelector(selectType);
@@ -27,9 +28,15 @@ export const Home = () => {
         dispatch(setSearch(searchParam));
         dispatch(setType(typeParam as FilterType));
         dispatch(setCurrentPage(pageParam));
-    }, [dispatch, searchParams]);
+
+        
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setInitialized(true);
+    }, []);
 
     useEffect(() => {
+        if (!initialized) return;
+
         const timer = setTimeout(() => {
             const params = new URLSearchParams();
 
@@ -49,7 +56,7 @@ export const Home = () => {
 
         return () => clearTimeout(timer);
         
-    }, [search, type, page, searchParams]);
+    }, [search, type, page, setSearchParams, initialized]);
 
     return (
         <>

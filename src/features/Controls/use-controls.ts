@@ -3,6 +3,7 @@ import { useAppDispatch } from '../../store';
 import type { FilterType, PokemonTypeName } from '../../types';
 import { selectSearch } from './controls-selectros';
 import { setSearch, setType } from './controls-slice';
+import { setCurrentPage } from '../PokemonList/pokemons-slice';
 
 const useControls = () => {
     const dispatch = useAppDispatch();
@@ -10,6 +11,7 @@ const useControls = () => {
     
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
         dispatch(setSearch(e.target.value));
+        dispatch(setCurrentPage(1));
     };
 
     type TypeOption = {
@@ -42,6 +44,7 @@ const useControls = () => {
     const handleSelect = (e: React.ChangeEvent<HTMLSelectElement, HTMLSelectElement>) => {
         const value = e.target.value as FilterType;
         dispatch(setType(value));
+        dispatch(setCurrentPage(1));
     };
 
     return {search, typeOptions, handleSearch, handleSelect};
