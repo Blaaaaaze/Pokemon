@@ -27,7 +27,7 @@ export const Home = () => {
         dispatch(setSearch(searchParam));
         dispatch(setType(typeParam as FilterType));
         dispatch(setCurrentPage(pageParam));
-    }, []);
+    }, [dispatch, searchParams]);
 
     useEffect(() => {
         const timer = setTimeout(() => {
