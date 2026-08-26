@@ -28,7 +28,7 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                 pokemonData && (
                     <>
                         <div className="container">
-                            <div className='img'>
+                            <div className={`img ${styles.pokemon__img}`}>
                                 <img src={pokemonData.img} alt={pokemonData.name} />
                             </div>
                             <section className={styles.pokemon__data}>

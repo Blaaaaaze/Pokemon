@@ -126,7 +126,6 @@ const pokemonSlice = createSlice({
                 state.totalCount = action.payload.count;
             })
             .addCase(loadPokemonsByType.fulfilled, (state, action) => {
-                state.status = 'idle';
                 state.allPokemonsList = action.payload.pokemonList;
                 state.totalCount = action.payload.count;
                 

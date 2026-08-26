@@ -1,6 +1,16 @@
 @use '../../styles/_index.scss' as styles;
 
 .pokemon {
+    &__img {
+        @media (min-width: styles.$tablet) {
+            width: 80%;
+        }
+
+        @media (min-width: styles.$desktop) {
+            width: 65%;
+        }
+    }
+
     &__data {
         display: flex;
         flex-direction: column;

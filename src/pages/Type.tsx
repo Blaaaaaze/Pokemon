@@ -1,14 +1,14 @@
-import { useNavigate, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import TypeDetails from '../features/TypeDetails/TypeDetails';
 import { Link } from 'react-router';
+import BackButton from '../components/BackButton/BackButton';
 
 export const Type = () => {
-    const navigate = useNavigate();
     const {type} = useParams<{ type: string }>();
 
     return (
         <div>
-            <button className='default-btn' onClick={() => navigate(-1)}>Back</button>
+            <BackButton />
             {
                 type && <TypeDetails type={type}/>
             }
