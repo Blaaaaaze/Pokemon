@@ -58,7 +58,7 @@ const Pagination = ({totalPages, currentPage, onPageChange}: PaginationProps) =>
                     ) : (
                         <button
                             key={item}
-                            className={item === currentPage ? styles.active : ''}
+                            className={`${item === currentPage ? styles.active : ''} default-btn`}
                             onClick={() => onPageChange(item)}
                         >
                             {item}

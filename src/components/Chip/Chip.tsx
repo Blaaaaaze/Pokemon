@@ -9,11 +9,11 @@ const Chip = ({text}: ChipProps) => {
     const navigate = useNavigate();
     const handleClick = (e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
-        navigate(`/${text}`);
+        navigate(`/${text}`);       
     };
 
     return (
-        <div className={`${styles.chip} ${styles[text]}`} onClick={(e) => handleClick(e)}>
+        <div tabIndex={0} className={`${styles.chip} ${styles[text]}`} onClick={(e) => handleClick(e)}>
             <p className={styles.chip__text}>{text}</p>
         </div>
     );

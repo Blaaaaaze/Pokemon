@@ -14,7 +14,7 @@ const Card = ({name, img, stats, types}: PokemonCard) => {
     };
 
     return (
-        <div className={styles.card} onClick={handleClick}>
+        <div className={styles.card} onClick={handleClick} tabIndex={0}>
             <div className={styles.card__image}>
                 <img src={img} alt={name} />
             </div>

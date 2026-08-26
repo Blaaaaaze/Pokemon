@@ -1,12 +1,14 @@
 import type { Ability, Pokemon, PokemonCard, PokemonLocal } from '../types';
 import type { pokemonList, PokemonListItem } from '../types/pokemonList';
+import pokemonPlaceholder from '../assets/img/placeholder.jpg';
+
 
 export const pokemonMapper = (pokemon: Pokemon, abilities: Ability[]): PokemonLocal => {
     return (
         {
             name: pokemon.name,
             id: pokemon.id,
-            img: pokemon.sprites.other['official-artwork'].front_default,
+            img: pokemon.sprites.other['official-artwork'].front_default || pokemonPlaceholder,
             stats: pokemon.stats,
             types: pokemon.types,
             abilities: abilities.map(ability => {
@@ -29,7 +31,7 @@ export const pokemonMapperToCard = (pokemonsApiData: Pokemon[]): PokemonCard[] =
     return pokemonsApiData.map(pokemon => (
         {
             name: pokemon.name,
-            img: pokemon.sprites.other['official-artwork'].front_default,
+            img: pokemon.sprites.other['official-artwork'].front_default || pokemonPlaceholder,
             stats: pokemon.stats,
             types: pokemon.types,
         }

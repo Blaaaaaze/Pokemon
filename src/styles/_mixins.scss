@@ -1,4 +1,5 @@
 @use './variables';
+@use "sass:color";
 
 @mixin h($_size, $_weight) {
     font-size: $_size;
@@ -6,5 +7,29 @@
 
     @media (min-width: variables.$desktop) {
         font-size: ($_size+1.5);
+    }
+}
+
+@mixin button($_backgrond-color, $_color, $_font-size) {
+    background-color: $_backgrond-color;
+    color: $_color;
+    font-size: $_font-size;
+    cursor: pointer;
+    border: none;
+
+    @media (hover: hover) {
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+
+    @media (hover: active) {
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+
+    @media (min-width: variables.$desktop) {
+        font-size: $_font-size + 0.5;
     }
 }

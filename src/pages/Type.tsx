@@ -8,7 +8,7 @@ export const Type = () => {
 
     return (
         <div>
-            <button onClick={() => navigate(-1)}>Back</button>
+            <button className='default-btn' onClick={() => navigate(-1)}>Back</button>
             {
                 type && <TypeDetails type={type}/>
             }
