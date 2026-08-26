@@ -34,8 +34,8 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                             <section className={styles.pokemon__data}>
                                 <h2 className="h2">{pokemonData.name}</h2>
                                 <div className={styles.pokemon__parametres}>
-                                    <span className={styles.pokemon__parameter}>Weight: {pokemonData.weight}</span>
-                                    <span className={styles.pokemon__parameter}>Height: {pokemonData.height}</span>
+                                    <span className={styles.pokemon__parameter}>Weight: {pokemonData.weight} kg</span>
+                                    <span className={styles.pokemon__parameter}>Height: {pokemonData.height} dm</span>
                                 </div>
                                 <ChipList chipContentList={pokemonData.types}/>
                                 <h3 className={`h3 ${styles['pokemon__sub-title']}`}>Stats</h3>
