@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux';
 import Card from '../../components/Card/Card';
 import { useAppDispatch} from '../../store';
 import styles from './PokemonList.module.scss';
-import { selectAllPokemons, selectCurrentPage, selectPokemons, selectPokemonsCount, selectStatus } from './pokemons-selectors';
+import { selectAllPokemons, selectCurrentPage, selectPageSize, selectPokemons, selectPokemonsCount, selectStatus } from './pokemons-selectors';
 import { useEffect } from 'react';
-import { loadPokemons, loadPokemonsByType, setCurrentPage } from './pokemons-slice';
+import { loadPokemons, loadPokemonsByType, setCurrentPage, setPageSize } from './pokemons-slice';
 import Pagination from '../../components/Pagination/Pagination';
 import { selectControls } from '../Controls/controls-selectros';
 import Preloader from '../../components/Preloader/Preloader';
@@ -18,8 +18,9 @@ const PokemonList = () => {
     const currentPage = useSelector(selectCurrentPage);
     const status = useSelector(selectStatus);
     const { search, type } = useSelector(selectControls);
+    const pageSize = useSelector(selectPageSize);
     
-    const pages = Math.ceil(totalCountPokemons / 20) ;
+    const pages = Math.ceil(totalCountPokemons / pageSize) ;
 
     const changePage = (newPage: number) => {
         if (newPage > 0 && newPage <= pages) {
@@ -37,14 +38,39 @@ const PokemonList = () => {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            dispatch(loadPokemons({pokemonList: allPokemons, page: currentPage, search: search}));
+            dispatch(loadPokemons({pokemonList: allPokemons, page: currentPage, search: search, pageSize}));
         }, 500);
 
         return () => {
             clearTimeout(timer);
         };
             
-    }, [dispatch, currentPage, totalCountPokemons, search, allPokemons]);
+    }, [dispatch, currentPage, totalCountPokemons, search, allPokemons, pageSize]);
+
+    useEffect(() => {
+        const updatePageSize = () => {
+            let newPageSize = pageSize;
+
+            if (window.innerWidth < 768) {
+                newPageSize = 10;
+            } else if (window.innerWidth < 1440) {
+                newPageSize = 21;
+            } else if (window.innerWidth >= 1440) {
+                newPageSize = 32;
+            }
+
+            dispatch(setPageSize(newPageSize));
+            dispatch(setCurrentPage(1));
+        };
+
+        updatePageSize();
+
+        window.addEventListener('resize', updatePageSize);
+
+        return () => {
+            window.removeEventListener('resize', updatePageSize);
+        };
+    }, [dispatch]);
 
     return (
         <>

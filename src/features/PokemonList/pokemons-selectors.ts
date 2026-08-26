@@ -5,3 +5,4 @@ export const selectPokemons = (state: RootState) => state.pokemons.pagePokemonsL
 export const selectPokemonsCount = (state: RootState) => state.pokemons.totalCount;
 export const selectCurrentPage = (state: RootState) => state.pokemons.currentPage;
 export const selectStatus = (state: RootState) => state.pokemons.status;
+export const selectPageSize = (state: RootState) => state.pokemons.pageSize;

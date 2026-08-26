@@ -55,6 +55,7 @@ export const loadPokemons = createAsyncThunk<
     pokemonList: PokemonListItem[],
     page: number,
     search: string,
+    pageSize: number
 },
 {
     extra: Extra,
@@ -62,12 +63,12 @@ export const loadPokemons = createAsyncThunk<
 }
 >(
     '@@pokemons/load-pokemons',
-    async ({ pokemonList, page, search }, {
+    async ({ pokemonList, page, search, pageSize }, {
         extra: {client},
         getState,
     }) => {
         
-        const start = (page - 1) * 20;
+        const start = (page - 1) * pageSize;
         const pokemonsFilter = pokemonList
             .filter(pokemon => pokemon.name.includes(search.trim()));
         const count = pokemonsFilter.length;
@@ -112,6 +113,9 @@ const pokemonSlice = createSlice({
     reducers: {
         setCurrentPage: (state, action: PayloadAction<number>) => {
             state.currentPage = action.payload;
+        },
+        setPageSize: (state, action: PayloadAction<number>) => {
+            state.pageSize = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -139,4 +143,4 @@ const pokemonSlice = createSlice({
 });
 
 export const pokemonReducer = pokemonSlice.reducer;
-export const {setCurrentPage} = pokemonSlice.actions;
+export const {setCurrentPage, setPageSize} = pokemonSlice.actions;
