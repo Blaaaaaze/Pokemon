@@ -6,7 +6,7 @@ import Header from './components/Header/Header';
 
 export const AppRouter = () => {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/Pokemon'>
             <Header />
             <Routes>
                 <Route path='/' element={<Home />}/>
