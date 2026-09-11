@@ -1,6 +1,6 @@
-import type { Ability, Pokemon, PokemonCard, PokemonLocal } from '../types';
-import type { pokemonList, PokemonListItem } from '../types/pokemonList';
-import pokemonPlaceholder from '../assets/img/placeholder.jpg';
+import type { Ability, Pokemon, PokemonCard, PokemonLocal } from '../../types';
+import type { pokemonList, PokemonListItem } from '../../types/pokemonList';
+import pokemonPlaceholder from '../../assets/img/placeholder.jpg';
 
 
 export const pokemonMapper = (pokemon: Pokemon, abilities: Ability[]): PokemonLocal => {

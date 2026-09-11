@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import type { Ability, Extra, Pokemon, PokemonLocal, Status } from '../../types';
-import { pokemonMapper } from '../../mappers/pokemonMapper';
+import { pokemonMapper } from '../../utils/mappers/pokemonMapper';
 
 export const loadPokemonData = createAsyncThunk<
 PokemonLocal,

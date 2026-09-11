@@ -7,6 +7,7 @@ import { loadPokemonData } from './pokemonDetails-slice';
 import ChipList from '../../components/ChipList/ChipList';
 import Preloader from '../../components/Preloader/Preloader';
 import StatList from '../../components/StatList/StatList';
+import { capitalize } from '../../utils/Formatters/Capitalize';
 
 interface PokemonDetailsProps {
     name: string
@@ -32,7 +33,7 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                                 <img src={pokemonData.img} alt={pokemonData.name} />
                             </div>
                             <section className={styles.pokemon__data}>
-                                <h2 className="h2">{pokemonData.name}</h2>
+                                <h2 className="h2">{capitalize(pokemonData.name)}</h2>
                                 <div className={styles.pokemon__parametres}>
                                     <span className={styles.pokemon__parameter}>Weight: {pokemonData.weight} kg</span>
                                     <span className={styles.pokemon__parameter}>Height: {pokemonData.height} dm</span>
@@ -49,7 +50,7 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                                     pokemonData.abilities.map(ability => {
                                         return (
                                             <div className={styles.ability__card} key={ability.name}>
-                                                <h4 className={styles['pokemon__sub-title']}>{ability.name}</h4>
+                                                <h4 className={styles['pokemon__sub-title']}>{capitalize(ability.name)}</h4>
                                                 <p>{ability.description}</p>
                                             </div>
                                         );

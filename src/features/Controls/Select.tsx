@@ -3,6 +3,7 @@ import styles from './Controls.module.scss';
 import { useSelector } from 'react-redux';
 import { selectType } from './controls-selectros';
 import { useEffect, useRef, useState } from 'react';
+import { capitalize } from '../../utils/Formatters/Capitalize';
 
 interface SelectProps {
     options: {
@@ -77,7 +78,7 @@ const Select = ({options, onChange}: SelectProps) => {
                                 setIsOpen(false);
                             }}
                         >
-                            {label}
+                            {capitalize(label)}
                         </button>
                     ))}
                 </div>
