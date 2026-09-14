@@ -37,6 +37,24 @@
         margin: 0 0 1rem;
     }
 
+    &__button {
+        width: 50%;
+        padding: 0;
+        text-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+
+        &::before {
+            content: '\002B';
+        }
+
+        @media (min-width: styles.$tablet) {
+            width: 38%;
+        }
+
+        @media (min-width: styles.$desktop) {
+            width: 25%;
+        }
+}
+
     &__stats {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

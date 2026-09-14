@@ -41,6 +41,7 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                                 <ChipList chipContentList={pokemonData.types}/>
                                 <h3 className={`h3 ${styles['pokemon__sub-title']}`}>Stats</h3>
                                 <StatList stats={pokemonData.stats}/>
+                                <button className={`default-btn ${styles.pokemon__button}`}>Add to My Team</button>
                             </section>
                         </div>
                         <section className={styles.abilities}>
