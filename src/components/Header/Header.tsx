@@ -9,16 +9,35 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <Link to="/"
-                onClick={() => {
-                    dispatch(setSearch(''));
-                    dispatch(setType(''));
-                    dispatch(setCurrentPage(1));
-                }}>
-                <h1 className={styles.header__title}>
+            <h1 className={styles.header__title}>
                     Pokemon
-                </h1>
-            </Link>
+            </h1>
+            <nav className={styles.navigation}>
+                <ul className={styles.navigation__list}>
+                    <li className={styles.navigation__item}>
+                        <Link to="/"
+                            className={styles.navigation__link}
+                            onClick={() => {
+                                dispatch(setSearch(''));
+                                dispatch(setType(''));
+                                dispatch(setCurrentPage(1));
+                            }}>
+                            Pokedex
+                        </Link>
+                    </li>
+                    <li className={styles.navigation__item}>
+                        <Link to="/my-team"
+                            className={styles.navigation__link}
+                            onClick={() => {
+                                dispatch(setSearch(''));
+                                dispatch(setType(''));
+                                dispatch(setCurrentPage(1));
+                            }}>
+                            My Team
+                        </Link>
+                    </li>
+                </ul>
+            </nav>
         </header>
     );
 };

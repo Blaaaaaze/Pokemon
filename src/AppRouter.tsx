@@ -12,6 +12,8 @@ export const AppRouter = () => {
                 <Route path='/' element={<Home />}/>
                 <Route path='/pokemon/:name' element={<Pokemon />}/>
                 <Route path='/:type' element={<Type />}/>
+                <Route path='/my-team' />
+                <Route path='*' element={<Home /> }/>
             </Routes>
         </BrowserRouter>
     );

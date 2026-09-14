@@ -1,14 +1,60 @@
+@use '../../styles/_index.scss' as styles;
+
 .header {
     background-color: red;
     padding: 0 0.7rem;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+
+    @media (min-width: styles.$tablet) {
+        justify-content: space-around;
+        align-items: center
+    }
     
     &__title {
         font-family: Pokemon;
-        font-size: 5rem;
+        font-size: 4rem;
         color: white;
         margin: 0;
         line-height: 1.7;
+
+        @media (min-width: styles.$desktop) {
+            font-size: 5.5rem;
+        }
+    }
+}
+
+.navigation {
+    &__list {
+        list-style-type: none;
+        margin: 0;            
+        padding: 0; 
+        display: flex;
+        gap: 1rem;
+
+        @media (min-width: styles.$desktop) { 
+            gap: 4rem;
+        }
+    }
+
+    &__item {
+        color: white;
+    }
+
+    &__link {
+        color: white;
+        line-height: 1.4;
+        font-size: 2rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+
+        @media (min-width: styles.$tablet) {
+            line-height: 1.7;
+            font-size: 2.5rem;
+        }
+
+        @media (min-width: styles.$desktop) { 
+            font-size: 3.5rem;
+        }
     }
 }
