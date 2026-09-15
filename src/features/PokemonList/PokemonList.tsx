@@ -1,7 +1,5 @@
 import { useSelector } from 'react-redux';
-import Card from '../../components/Card/Card';
 import { useAppDispatch} from '../../store';
-import styles from './PokemonList.module.scss';
 import { selectAllPokemons, selectCurrentPage, selectPageSize, selectPokemons, selectPokemonsCount, selectStatus } from './pokemons-selectors';
 import { useEffect } from 'react';
 import { loadPokemons, loadPokemonsByType, setCurrentPage, setPageSize } from './pokemons-slice';
