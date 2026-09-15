@@ -8,6 +8,7 @@ import ChipList from '../../components/ChipList/ChipList';
 import Preloader from '../../components/Preloader/Preloader';
 import StatList from '../../components/StatList/StatList';
 import { capitalize } from '../../utils/Formatters/Capitalize';
+import { addPokemon } from '../Team/team-slice';
 
 interface PokemonDetailsProps {
     name: string
@@ -41,7 +42,10 @@ const PokemonDetails = ({name}: PokemonDetailsProps) => {
                                 <ChipList chipContentList={pokemonData.types}/>
                                 <h3 className={`h3 ${styles['pokemon__sub-title']}`}>Stats</h3>
                                 <StatList stats={pokemonData.stats}/>
-                                <button className={`default-btn ${styles.pokemon__button}`}>Add to My Team</button>
+                                <button 
+                                    className={`default-btn ${styles.pokemon__button}`}
+                                    onClick={() => dispatch(addPokemon(pokemonData))}
+                                >Add to My Team</button>
                             </section>
                         </div>
                         <section className={styles.abilities}>

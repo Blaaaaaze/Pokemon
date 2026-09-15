@@ -6,13 +6,15 @@ import { pokemonReducer } from './features/PokemonList/pokemons-slice';
 import {controlsReducer} from './features/Controls/controls-slice';
 import { pokemonDetailsReducer } from './features/PokemonDetails/pokemonDetails-slice';
 import { typeDetailsReducer } from './features/TypeDetails/typeDetails-slice';
+import { teamSliceReducer } from './features/Team/team-slice';
 
 export const store = configureStore({
     reducer: {
         pokemons: pokemonReducer,
         controls: controlsReducer,
         pokemonDetails: pokemonDetailsReducer,
-        typeDetails: typeDetailsReducer
+        typeDetails: typeDetailsReducer,
+        team: teamSliceReducer
     },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({

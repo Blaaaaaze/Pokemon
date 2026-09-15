@@ -8,6 +8,7 @@ import { loadPokemons, loadPokemonsByType, setCurrentPage, setPageSize } from '.
 import Pagination from '../../components/Pagination/Pagination';
 import { selectControls } from '../Controls/controls-selectros';
 import Preloader from '../../components/Preloader/Preloader';
+import CardList from '../../components/CardList/CardList';
 
 
 const PokemonList = () => {
@@ -90,16 +91,7 @@ const PokemonList = () => {
                                                         (totalCountPokemons > 0)
                                                             ? (
                                                                 <>
-                                                                    <div className={styles.wrapper}>
-                                                                        {pokemons.map(pokemon => {
-                                                                            return <Card
-                                                                                key={pokemon.name}
-                                                                                name={pokemon.name}
-                                                                                img={pokemon.img}
-                                                                                stats={pokemon.stats}
-                                                                                types={pokemon.types} />;
-                                                                        })}
-                                                                    </div>
+                                                                    <CardList pokemons={pokemons}/>
                                                                     <Pagination
                                                                         currentPage={currentPage}
                                                                         totalPages={pages}
