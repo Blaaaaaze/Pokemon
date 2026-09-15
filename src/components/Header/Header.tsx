@@ -2,7 +2,7 @@ import { setSearch, setType } from '../../features/Controls/controls-slice';
 import { setCurrentPage } from '../../features/PokemonList/pokemons-slice';
 import { useAppDispatch } from '../../store';
 import styles from './Header.module.scss';
-import { Link, NavLink } from 'react-router';
+import { NavLink } from 'react-router';
 
 const Header = () => {
     const dispatch = useAppDispatch();
