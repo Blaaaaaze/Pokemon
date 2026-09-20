@@ -4,18 +4,22 @@ import { Pokemon } from './pages/Pokemon';
 import { Type } from './pages/Type';
 import Header from './components/Header/Header';
 import Team from './pages/Team';
+import { Toaster } from 'sonner';
 
 export const AppRouter = () => {
     return (
-        <BrowserRouter basename='/Pokemon'>
-            <Header />
-            <Routes>
-                <Route path='/' element={<Home />}/>
-                <Route path='/pokemon/:name' element={<Pokemon />}/>
-                <Route path='/:type' element={<Type />}/>
-                <Route path='/my-team' element={<Team />}/>
-                <Route path='*' element={<Home /> }/>
-            </Routes>
-        </BrowserRouter>
+        <>
+            <BrowserRouter basename='/Pokemon'>
+                <Header />
+                <Routes>
+                    <Route path='/' element={<Home />}/>
+                    <Route path='/pokemon/:name' element={<Pokemon />}/>
+                    <Route path='/:type' element={<Type />}/>
+                    <Route path='/my-team' element={<Team />}/>
+                    <Route path='*' element={<Home /> }/>
+                </Routes>
+            </BrowserRouter>
+            <Toaster />
+        </>
     );
 };

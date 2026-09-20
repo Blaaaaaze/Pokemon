@@ -52,3 +52,7 @@
 .primary-btn {
     @include mixins.button(rgb(255, 0, 0), white, 2rem);
 }
+
+.right {
+    margin-left: auto;
+}
