@@ -69,7 +69,8 @@ export type PokemonLocal = {
     weight: number,
     stats: PokemonStat[],
     types: PokemonType[],
-    abilities: AbilityLocal[]
+    abilities: AbilityLocal[],
+    power: number
 }
 
 export type PokemonCard = {

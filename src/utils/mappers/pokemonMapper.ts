@@ -23,6 +23,7 @@ export const pokemonMapper = (pokemon: Pokemon, abilities: Ability[]): PokemonLo
             ),
             height: pokemon.height,
             weight: pokemon.weight,
+            power: pokemon.stats.reduce((res, stat) => res + stat.base_stat, 0)
         }
     );
 };

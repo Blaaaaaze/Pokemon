@@ -2,6 +2,8 @@ import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 import type { PokemonLocal } from '../../types';
 import type { AppDispatch, RootState } from '../../store';
 
+export const LIMIT_OF_POWER = 2700;
+
 interface TeamSlice {
     pokemons: PokemonLocal[]
 };
@@ -13,16 +15,24 @@ const initialState: TeamSlice = {
 export const checkStateAndAddItem = (newItem: PokemonLocal) => (dispatch: AppDispatch, getState: () => RootState) => {
     const { team } = getState();
 
-    if(team.pokemons.length !== 6) {
-        dispatch(addPokemon(newItem));
+    if (team.pokemons.length === 6) {
         return {
-            success: true,
-            message: 'Покемон добавлен в команду'
+            success: false,
+            message: 'Покемон не добавлен в команду. Достигнут лимит команды'    
         };
     }
+
+    if (team.pokemons.reduce((sum, pokemon) => sum + pokemon.power, 0) >= LIMIT_OF_POWER) {
+        return {
+            success: false,
+            message: 'Покемон не добавлен в команду. Достигнут лимит мощности команды'    
+        };
+    }
+
+    dispatch(addPokemon(newItem));
     return {
-        success: false,
-        message: 'Покемон не добавлен в команду. Достигнут лимит команды'    
+        success: true,
+        message: 'Покемон добавлен в команду'
     };
 };
 
