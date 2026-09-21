@@ -9,7 +9,7 @@ import { Toaster } from 'sonner';
 export const AppRouter = () => {
     return (
         <>
-            <HashRouter basename='/Pokemon'>
+            <HashRouter>
                 <Header />
                 <Routes>
                     <Route path='/' element={<Home />}/>
