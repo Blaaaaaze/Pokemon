@@ -7,6 +7,8 @@ import {controlsReducer} from './features/Controls/controls-slice';
 import { pokemonDetailsReducer } from './features/PokemonDetails/pokemonDetails-slice';
 import { typeDetailsReducer } from './features/TypeDetails/typeDetails-slice';
 import { teamSliceReducer } from './features/Team/team-slice';
+import { teamListener } from './features/Team/team-listener';
+import { loadTeam } from './features/Team/team-storage';
 
 export const store = configureStore({
     reducer: {
@@ -16,6 +18,11 @@ export const store = configureStore({
         typeDetails: typeDetailsReducer,
         team: teamSliceReducer
     },
+    preloadedState: {
+        team: {
+            pokemons: loadTeam(),
+        },
+    },
     devTools: true,
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         thunk: {
@@ -24,7 +31,7 @@ export const store = configureStore({
                 api,
             }
         }
-    })
+    }).prepend(teamListener.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
